@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+{% block content %}
+
+{% for pet in pets %}
+<div class="card" style="width: 18rem;">
+    {% if pet.photo_url %}
+    <img src="{{pet.photo_url}}" class="card-img-top" alt="photo not available">
+   
+    {% else %}
+        <img src="https://images.unsplash.com/photo-1666961898009-bd6d49fb810a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" class="card-img-top" alt="photo not available">
+    {% endif %}
+    <div class="card-body">
+        {% if pet.is_available %}
+        <h5 class="card-title">{{ pet.name }} is available</h5>
+        {% else %}
+                <h5 class="card-title">{{ pet.name }} </h5>
+        {% endif %}
+    </div>
+    <a href="/{{pet.id}}/edit" class="btn btn-info  btn-sm">Edit</a>
+</div>
+{% endfor %}
+ <a href="{{ url_for('Add_pet') }}" class="btn btn-success">Add a Pet</a>
+
+{% endblock %}
